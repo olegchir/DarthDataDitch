@@ -18,15 +18,15 @@ def get_s3_client():
         _s3_client = session.client("s3")
     return _s3_client
 
-async def upload_file_to_s3(file: UploadFile):
+async def upload_file_to_s3(file_contents: bytes, filename: str):
     try:
-        file_contents = await file.file.read()
+        # No need to read from file here, as we're already passing file_contents
         get_s3_client().put_object(
             Bucket=S3_BUCKET_NAME,
-            Key=file.filename,
+            Key=filename,
             Body=file_contents,
         )
-        return {"status": "The Force is strong with this one!", "message": f"{file.filename} Hyperdrived to {S3_BUCKET_NAME}"}
+        return {"status": "The Force is strong with this one!", "message": f"{filename} Hyperdrived to {S3_BUCKET_NAME}"}
     except Exception as e:
         return {"status": "It's a trap!", "message": str(e)}
 

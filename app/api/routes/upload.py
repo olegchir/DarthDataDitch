@@ -5,4 +5,5 @@ router = APIRouter()
 
 @router.post("/upload")
 async def upload(file: UploadFile = File(...)):
-    return await s3.upload_file(file)
+    file_contents = await file.read()
+    return await s3.upload_file_to_s3(file_contents, file.filename)
