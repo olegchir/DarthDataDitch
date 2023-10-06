@@ -1,3 +1,4 @@
+import os
 import logging
 import boto3
 from botocore.exceptions import BotoCoreError, ClientError, PartialCredentialsError
@@ -7,7 +8,12 @@ from .config import S3_BUCKET_NAME, AWS_PROFILE_NAME
 logging.basicConfig(level=logging.ERROR)
 logger = logging.getLogger(__name__)
 
-session = boto3.Session(profile_name=AWS_PROFILE_NAME)
+credentials_path = os.path.expanduser("~/.aws/credentials")
+
+if os.path.exists(credentials_path):
+    session = boto3.Session(profile_name=AWS_PROFILE_NAME)
+else:
+    session = boto3.Session()
 
 _s3_client = None
 
