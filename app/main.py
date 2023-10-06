@@ -1,5 +1,5 @@
 import logging
-from fastapi import FastAPI, HTTPException
+from fastapi import FastAPI
 from app.api import router_list
 from app.utils.config import S3_BUCKET_NAME
 from app.utils import s3
