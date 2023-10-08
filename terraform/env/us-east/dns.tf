@@ -4,7 +4,4 @@ resource "aws_route53_record" "us-east-cluster" {
   type    = "A"
   ttl     = "300"
   records = [module.alb_eip.eip_address]
-  tags = {
-    managedby = "vader"
-  }
 }

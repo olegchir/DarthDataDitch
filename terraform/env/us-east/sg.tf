@@ -27,8 +27,9 @@ resource "aws_security_group_rule" "allow_http" {
 }
 
 resource "aws_security_group" "eks_cluster_sg" {
-  vpc_id = module.us_east_vpc.vpc_id
-  name   = "eks-cluster-sg"
+  vpc_id      = module.us_east_vpc.vpc_id
+  name        = "eks-cluster-sg"
+  description = "Security group for EKS Cluster"
 
   tags = {
     Name = "eks-cluster-sg",
