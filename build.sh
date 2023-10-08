@@ -1,7 +1,6 @@
 #!/bin/bash
 ECR_URL="433663489437.dkr.ecr.eu-central-1.amazonaws.com/darthdataditch-ecr"
-
-$(aws ecr get-login --no-include-email --region eu-central-1)
+aws ecr get-login-password --region eu-central-1 | docker login --username AWS --password-stdin ${ECR_URL}
 
 if [ -f .env ]; then
     docker build -f docker/Dockerfile.dev --build-arg USE_ENV=.env -t darthdataditch:dev .
