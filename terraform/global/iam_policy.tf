@@ -9,14 +9,21 @@ resource "aws_iam_policy" "s3_holocron-archives_policy" {
     Version = "2012-10-17",
     Statement = [
       {
-        Action   = ["s3:PutObject", "s3:GetObject"],
-        Effect   = "Allow",
-        Resource = "${aws_s3_bucket.holocron-archives.arn}/*"
-      },
-      {
         Action   = ["s3:ListBucket"],
         Effect   = "Allow",
-        Resource = "${aws_s3_bucket.holocron-archives.arn}/"
+        Resource = ["${aws_s3_bucket.holocron-archives.arn}"]
+      },
+      {
+        Action   = [
+          "s3:GetObject",
+          "s3:PutObject",
+          "s3:DeleteObject",
+          "s3:ListMultipartUploadParts",
+          "s3:AbortMultipartUpload",
+          "s3:ListBucketMultipartUploads",
+        ],
+        Effect   = "Allow",
+        Resource = ["${aws_s3_bucket.holocron-archives.arn}/*"]
       }
     ]
   })
