@@ -9,4 +9,4 @@ UVICORN_WORKER_CLASS="uvicorn.workers.UvicornWorker"   # Uvicorn worker class
 APP_MODULE="app.main:app"                              # the application module and app instance
                                                        # AWS profile name
 # Start your FastAPI app with Gunicorn
-exec gunicorn --workers $NUM_WORKERS --worker-class $UVICORN_WORKER_CLASS --bind 0.0.0.0:8000 $APP_MODULE --config=gunicorn_conf.py
+gunicorn --workers $NUM_WORKERS --worker-class $UVICORN_WORKER_CLASS --bind 0.0.0.0:8000 $APP_MODULE --config=gunicorn_conf.py
