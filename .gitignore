@@ -6,4 +6,5 @@
 *.swo
 .env
 .log
-venv/*
+venv/
+.terraform/
