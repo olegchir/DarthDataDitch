@@ -32,7 +32,8 @@ acmCertificateArn: arn:aws:acm:us-east-1:433663489437:certificate/bdf01c71-17c2-
 
 # Pod configurations
 pod:
-  annotations: {}
+  annotations:
+    eks.amazonaws.com/role-arn: arn:aws:iam::433663489437:role/eks-node-role
 
 # Resource requests and limits
 resources: 
