@@ -11,7 +11,7 @@ Inrastructure provisioned in AWS by terraform and at the end you will have confi
 1. All outputs for app deployment configuration
 ## Code Organisation.
 This terraform code organized with environments and modules and this code utilise terraform remote states. All related AWS provisioning code located in **terroform** directory of this git repo and structured as below.
-## .
+
 ## ├── env
 ## │   ├── eu-central
 ## │   └── us-east
