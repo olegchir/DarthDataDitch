@@ -33,6 +33,7 @@ Files which are startes with `_` are not making changes to infra directly. Now l
 All provisioned resources will be marked with tag `managedby = "vader"` 
 ## Infrastructure Dependencies
 1. AWS and Access to it.
+1. Configured `aws-cli`
 1. Domain or zone with avialability to delegate it
 1. Terraform version 1.6.0
 ## Order of applying
