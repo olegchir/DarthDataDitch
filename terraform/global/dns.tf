@@ -1,5 +1,8 @@
 resource "aws_route53_zone" "darthdataditch" {
   name = "darthdataditch.jftr.info"
+  tags = {
+    managedby = "vader"
+  }
 }
 
 output "darthdataditch_zone_id" {

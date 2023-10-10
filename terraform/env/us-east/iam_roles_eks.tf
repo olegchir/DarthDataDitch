@@ -1,6 +1,3 @@
-##TODO: fix generation   Federated = "arn:aws:iam::${data.aws_caller_identity.us_east_eks.account_id}:oidc-provider/${replace(module.us_east_eks.eks_oidc_url, "https://", "")}"
-## TODO get federat4ed from eks_oidc_url
-
 resource "aws_iam_role" "alb_ingress_controller" {
   name = "alb-ingress-controller"
   tags = {
@@ -19,7 +16,6 @@ resource "aws_iam_role" "alb_ingress_controller" {
           Action = "sts:AssumeRoleWithWebIdentity",
           Condition = {
             "StringEquals" = {
-#              "oidc.eks.${var.region}.amazonaws.com/id/B0A3BA629A36AF1B518A3B0DF72F01FB:*" : "${var.eks_alb_sa}",
                "${replace(module.us_east_eks.eks_oidc_url, "https://", "")}:sub" : "${var.eks_alb_sa}"
             }
           }
@@ -48,30 +44,31 @@ resource "aws_iam_role" "eks_node_role" {
   tags = {
     managedby = "vader"
   }
+  #TODO: make less restrictive
   assume_role_policy = jsonencode({
-      Version = "2012-10-17",
-      Statement = [
-        {
-          Effect = "Allow",
-          Principal = {
-            Service = "ec2.amazonaws.com"
-          },
-          Action = "sts:AssumeRole"
-        },
-        {
-          Effect = "Allow",
-          Principal = {
-            Federated = aws_iam_openid_connect_provider.eks_oidc.arn
-          },
-          Action = "sts:AssumeRoleWithWebIdentity",
-          Condition = {
-            "StringEquals" = {
-              "${module.us_east_eks.eks_oidc_url}:sub" : "${var.eks_alb_sa}"
-            }
-          }
-        }
-      ]
-    })
+   Version = "2012-10-17",
+   Statement = [
+     {
+       Effect = "Allow",
+       Principal = {
+         Service = "ec2.amazonaws.com"
+       },
+       Action = "sts:AssumeRole"
+     },
+     {
+       Effect = "Allow",
+       Principal = {
+         Federated = "${aws_iam_openid_connect_provider.eks_oidc.arn}"
+       },
+       Action = "sts:AssumeRoleWithWebIdentity",
+       Condition = {
+         "StringEquals" = {
+           "${module.us_east_eks.eks_oidc_url}:sub" : "${var.eks_alb_sa}"
+         }
+       }
+     }
+   ]
+})
 }
 
 resource "aws_iam_role_policy_attachment" "eks_node_amazon_eks_worker_node_policy" {

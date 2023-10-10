@@ -1,26 +1,27 @@
-module "alb_eip-a" {
+## Pre-created EIP for using with AWS NLB
+module "alb_eip_a" {
   source = "../../modules/eip"
   eip_name = "alb-eip-${var.region}-a"
 }
 
-output "alb_eip_address" {
-  value       = module.alb_eip.eip_address
+output "alb_eip_address_a" {
+  value       = module.alb_eip_a.eip_address
 }
 
-output "alb_eip_allocation_id" {
-  value       = module.alb_eip.eip_allocation_id
+output "alb_eip_allocation_id_a" {
+  value       = module.alb_eip_a.eip_allocation_id
 }
 
 
-module "alb_eip-b" {
+module "alb_eip_b" {
   source = "../../modules/eip"
   eip_name = "alb-eip-${var.region}-b"
 }
 
-output "alb_eip_address" {
-  value       = module.alb_eip-b.eip_address
+output "alb_eip_address_b" {
+  value       = module.alb_eip_b.eip_address
 }
 
-output "alb_eip_allocation_id" {
-  value       = module.alb_eip-b.eip_allocation_id
+output "alb_eip_allocation_id_b" {
+  value       = module.alb_eip_b.eip_allocation_id
 }

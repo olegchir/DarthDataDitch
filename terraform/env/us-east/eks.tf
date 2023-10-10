@@ -13,7 +13,6 @@ data "aws_caller_identity" "us_east_eks" {}
 
 data "external" "eks_thumbprint" {
   program = ["scripts/thumbprint.sh"]
-
   query = {
     cluster_name = module.us_east_eks.eks_cluster_name
     region       = var.region
@@ -30,12 +29,10 @@ output "eks_oidc_url" {
 }
 
 resource "aws_eks_identity_provider_config" "us_east_eks" {
- cluster_name = module.us_east_eks.eks_cluster_name
- oidc {
- client_id = "sts.${var.region}.amazonaws.com"
- identity_provider_config_name = "us_east_eks"
- #issuer_url = "https://${aws_iam_openid_connect_provider.eks_oidc.url}"
- issuer_url = module.us_east_eks.eks_oidc_url
-}
-
+  cluster_name = module.us_east_eks.eks_cluster_name
+  oidc {
+    client_id = "sts.${var.region}.amazonaws.com"
+    identity_provider_config_name = "us_east_eks"
+    issuer_url = module.us_east_eks.eks_oidc_url
+  }
 }

@@ -3,7 +3,3 @@ variable "region" {
     default     = "eu-central-1"  
 }
 
-variable "profile" {
-    type        = string
-    default     = "jb-testtask"
-}

@@ -5,7 +5,7 @@ resource "aws_acm_certificate" "certificate" {
 
   tags = {
     Name      = var.certificate_name,
-    managedby = "terraform"
+    managedby = "vader"
   }
 
   lifecycle {
@@ -21,7 +21,6 @@ resource "aws_route53_record" "certificate_validation" {
       record = dvo.resource_record_value
     }
   }
-
   name    = each.value.name
   type    = "CNAME"
   zone_id = var.route53_zone_id

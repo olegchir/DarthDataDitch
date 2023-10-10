@@ -13,6 +13,9 @@ data "aws_ami" "latest_debian_ami" {
 resource "aws_key_pair" "akononov_key" {
   key_name   = "akononov-key"
   public_key = file("~/.ssh/id_rsa.pub")
+  tags = {
+    managedby = "vader"
+  }
 }
 
 resource "aws_instance" "build" {
@@ -23,7 +26,7 @@ resource "aws_instance" "build" {
 
   tags = {
     Name     = "build",
-    managedby = "terraform"
+    managedby = "vader"
   }
 }
 
@@ -33,23 +36,18 @@ resource "aws_eip" "build-ip" {
 
 resource "aws_security_group" "allow_ssh_build" {
   name_prefix = "allow-ssh-"
-  
-  # Ingress rules
-  ingress {
+    ingress {
     from_port   = -1
     to_port     = -1
     protocol    = "icmp"
     cidr_blocks = ["0.0.0.0/0"]
   }
-
   ingress {
     from_port   = 22
     to_port     = 22
     protocol    = "tcp"
     cidr_blocks = ["0.0.0.0/0"]
   }
-
-  # Default egress rule
   egress {
     from_port   = 0
     to_port     = 0

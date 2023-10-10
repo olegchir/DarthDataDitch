@@ -5,7 +5,7 @@ resource "aws_eks_cluster" "this" {
     managedby = "vader"
   }
 
-  vpc_config {
+vpc_config {
     subnet_ids = var.subnet_ids
     security_group_ids = [var.security_group_id]
   }
@@ -36,6 +36,3 @@ resource "aws_eks_node_group" "this" {
 output "eks_cluster_name" {
   value = aws_eks_cluster.this.name
 }
-
-
-#TODO: Launch Template

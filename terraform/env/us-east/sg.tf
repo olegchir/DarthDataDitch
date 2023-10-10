@@ -1,26 +1,26 @@
-# ALB Security Group
-resource "aws_security_group" "allow_alb" {
-  vpc_id = module.us_east_vpc.vpc_id
+### will be used when we migrate to NLB
+# resource "aws_security_group" "allow_alb" {  
+#   vpc_id = module.us_east_vpc.vpc_id
 
-  egress {
-    from_port   = 0
-    to_port     = 0
-    protocol    = "-1"
-    cidr_blocks = ["0.0.0.0/0"]
-  }
+#   egress {
+#     from_port   = 0
+#     to_port     = 0
+#     protocol    = "-1"
+#     cidr_blocks = ["0.0.0.0/0"]
+#   }
 
-    ingress {
-    from_port   = 443
-    to_port     = 443
-    protocol    = "tcp"
-    cidr_blocks = [format("%s/32", module.alb_eip.eip_address)]
-  }
+#     ingress {
+#     from_port   = 443
+#     to_port     = 443
+#     protocol    = "tcp"
+#     cidr_blocks = [format("%s/32", module.alb_eip.eip_address)]
+#   }
 
-  tags = {
-    managedby = "vader"
-    Name      = "alb"
-  }
-}
+#   tags = {
+#     managedby = "vader"
+#     Name      = "alb"
+#   }
+# }
 
 resource "aws_security_group" "eks_cluster_sg" {
   vpc_id      = module.us_east_vpc.vpc_id
