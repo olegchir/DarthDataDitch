@@ -26,6 +26,9 @@ This terraform code organized with environments and modules and this code utilis
 ```
 In the ```global``` environment you will bi find everythong necessary for initial AWS configuration. In the ```env/region-name``` all necessary for provisioning regions.
 ## Infrastructure Dependencies
+1. AWS and Access to it.
+1. Domain or zone with avialability to delegate it
+1. Terraform version 1.6.0
 ## Order of execution
 1. git clone this repository and make changes to terraform necessary for exact your setup, e.g. s3 buckets/domain names/etc
 1. Provisioning global environment - `terraform init` and `terraform apply` in **global** environment

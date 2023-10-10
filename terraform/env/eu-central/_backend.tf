@@ -1,7 +1,7 @@
 terraform {
   backend "s3" {
     bucket = "jb-tt-tf-state"
-    key    = "us-east/us-east.tfstate"
+    key    = "eu-central/eu-central.tfstate"
     region = "eu-central-1"
   }
   required_providers {
