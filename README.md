@@ -56,13 +56,12 @@ All provisioned resources will be marked with tag `managedby = "vader"`
 1. Get EKS context - aws eks --region <region-code> update-kubeconfig --name <cluster-name>
 
 ## setup alb to EKS
-helm upgrade -i aws-load-balancer-controller eks/aws-load-balancer-controller --set clusterName=<eks-cluster-name> --set serviceAccount.create=false --set serviceAccount.name=aws-load-balancer-controller --namespace kube-system
+helm upgrade -i aws-load-balancer-controller eks/aws-load-balancer-controller --set clusterName=<eks-cluster-name> --set serviceAccount.create=false --set serviceAccount.name=aws-load-balancer-controller
 
-
+#### US ingress
 helm repo add eks https://aws.github.io/eks-charts``
 
 helm upgrade --install aws-load-balancer-controller eks/aws-load-balancer-controller \
-    --namespace kube-system \
     --set clusterName=eks-cluster-us-east-1 \
     --set serviceAccount.create=true \
     --set serviceAccount.name=aws-ddload-balancer-controller \
@@ -71,4 +70,26 @@ helm upgrade --install aws-load-balancer-controller eks/aws-load-balancer-contro
     --set serviceAccount.annotations."eks\.amazonaws\.com/role-arn"=arn:aws:iam::433663489437:role/alb-ingress-controller
 
 
-# Infrastructure
+
+## App deployment
+### app deployment EU
+
+
+#### Get k8s context
+aws eks --region eu-central-1 update-kubeconfig --name eks-cluster-eu-central-1
+#### Install aws-ingress-controller
+helm repo add eks https://aws.github.io/eks-charts
+
+helm upgrade --install aws-load-balancer-controller eks/aws-load-balancer-controller \
+--set clusterName=eks-cluster-eu-central-1 \
+--set serviceAccount.create=true \
+--set serviceAccount.name=aws-ddload-balancer-controller \
+--set region=eu-central-1 \
+--set vpcId=vpc-071184ccbca84c38a \
+--set serviceAccount.annotations."eks\.amazonaws\.com/role-arn"=arn:aws:iam::433663489437:role/alb-ingress-controller-eu-central-1
+
+
+helm upgrade --install helmdataditch ./darthdataditch-0.1.0.tgz  -f vaulues-eu.yaml
+--set image.tag=$MY_ENV_VARIABLE
+helm install my-release my-chart --set image.tag=$MY_ENV_VARIABLE
+
