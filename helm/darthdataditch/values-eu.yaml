@@ -1,0 +1,78 @@
+# values.yaml for darthdataditch Helm chart
+#Service account
+serviceAccount:
+  create: true
+  name: darthdataditch
+
+# Application configurations
+replicaCount: 2
+image:
+  repository: 433663489437.dkr.ecr.eu-central-1.amazonaws.com/darthdataditch-ecr
+  tag: 0.0.4
+  pullPolicy: Always
+
+# Service configurations
+service:
+  type: ClusterIP
+  port: 8000
+
+# Ingress configurations
+ingress:
+  enabled: true
+  annotations: {}
+  host: eu.darthdataditch.jftr.info
+  path: /
+  subnets:
+    - subnet-0821d59cb5acef490
+    - subnet-02bbe06f9a2a45466
+  eipId: 
+    - eipalloc-0f4c057d39b58ff93
+    - eipalloc-0b75e29e04bff4e91
+
+# ACM Certificate ARN for HTTPS
+acmCertificateArn: arn:aws:acm:eu-central-1:433663489437:certificate/8aef760a-6292-4dd1-8e5b-d4adf93b2d00
+
+# Pod configurations
+pod:
+  annotations:
+    eks.amazonaws.com/role-arn: arn:aws:iam::433663489437:role/eks-node-role-eu-central-1
+
+# Resource requests and limits
+resources: 
+  requests:
+    cpu: 100m
+    memory: 128Mi
+  limits:
+    cpu: 200m
+    memory: 256Mi
+
+# Node selector
+nodeSelector: {}
+
+# Tolerations
+tolerations: []
+
+# Affinity
+affinity: 
+  podAntiAffinity:
+    requiredDuringSchedulingIgnoredDuringExecution:
+      - labelSelector:
+          matchExpressions:
+            - key: app
+              operator: In
+              values:
+                - darthdataditch
+        topologyKey: "kubernetes.io/hostname"
+
+autoscaling:
+  enabled: false
+  minReplicas: 1
+  maxReplicas: 2
+  targetCPUUtilizationPercentage: 80
+
+env:
+  S3_BUCKET_NAME: holocron-archives
+
+# debug
+containerCommand: ["/bin/bash"]
+containerArgs: ["-c", "sleep 3600"]
