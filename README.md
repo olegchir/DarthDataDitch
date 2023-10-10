@@ -25,7 +25,11 @@ This terraform code organized with environments and modules and this code utilis
     |* vpc
 ```
 In the ```global``` environment you will bi find everythong necessary for initial AWS configuration. In the ```env/region-name``` all necessary for provisioning regions. ```env/region/policies``` needed for storing huge AWS policies for save some readability for code ```env/region/policies``` reseved for external scripts e.g. get data which are not supported by terraform directly but needed for the project.
-Files which are startes with `_` are not making changes to infra directly
+Files which are startes with `_` are not making changes to infra directly. Now lets take a look on modules:
+1. `modules/acm` - used for Amazon certificate manager configuration in each environment
+1. `module/eip` - used for external ip allocation
+1. `module/eks` - used for EKS cluster provisioning
+1. `module/vpc` - used for regional vpc provisioning
 ## Infrastructure Dependencies
 1. AWS and Access to it.
 1. Domain or zone with avialability to delegate it
