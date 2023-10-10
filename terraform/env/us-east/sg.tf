@@ -9,21 +9,17 @@ resource "aws_security_group" "allow_alb" {
     cidr_blocks = ["0.0.0.0/0"]
   }
 
+    ingress {
+    from_port   = 443
+    to_port     = 443
+    protocol    = "tcp"
+    cidr_blocks = [format("%s/32", module.alb_eip.eip_address)]
+  }
+
   tags = {
     managedby = "vader"
     Name      = "alb"
   }
-}
-
-resource "aws_security_group_rule" "allow_http" {
-  security_group_id = aws_security_group.allow_alb.id
-
-  type        = "ingress"
-  from_port   = 443
-  to_port     = 443
-  protocol    = "tcp"
-  cidr_blocks = ["0.0.0.0/0"]
-  description = "HTTPS"
 }
 
 resource "aws_security_group" "eks_cluster_sg" {

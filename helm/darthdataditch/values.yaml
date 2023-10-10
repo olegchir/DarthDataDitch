@@ -8,7 +8,7 @@ serviceAccount:
 replicaCount: 2
 image:
   repository: 433663489437.dkr.ecr.eu-central-1.amazonaws.com/darthdataditch-ecr
-  tag: prod
+  tag: 0.0.4
   pullPolicy: Always
 
 # Service configurations
@@ -21,14 +21,14 @@ ingress:
   enabled: true
   annotations: {}
   host: us.darthdataditch.jftr.info
-  path: /*
+  path: /
   subnets:
-    - subnet-04e7e1c50330691b9
-    - subnet-0c64e9a8e971bf505
-  eipId: eipalloc-0a49677f3bc4b131a
+    - subnet-080c103c8fe171b8c
+    - subnet-065073ac3d96f6fb5
+  eipId: eipalloc-06636ee36ce973e25
 
 # ACM Certificate ARN for HTTPS
-acmCertificateArn: arn:aws:acm:us-east-1:433663489437:certificate/bdf01c71-17c2-4ce7-9d76-57b0f45599ff
+acmCertificateArn: arn:aws:acm:us-east-1:433663489437:certificate/fa722073-69d2-430a-8620-2b8172ea3dff
 
 # Pod configurations
 pod:

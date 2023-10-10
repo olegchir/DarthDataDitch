@@ -18,8 +18,8 @@ spec:
       containers:
         - name: {{ .Chart.Name }}
           image: "{{ .Values.image.repository }}:{{ .Values.image.tag | default .Chart.AppVersion }}"
-          command: {{ .Values.containerCommand }}
-          args: {{ .Values.containerArgs }}
+          #command: {{ .Values.containerCommand }}
+          #args: {{ .Values.containerArgs }}
           env:
           - name: S3_BUCKET_NAME
             value: "{{ .Values.env.S3_BUCKET_NAME }}"

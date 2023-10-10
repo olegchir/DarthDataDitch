@@ -11,6 +11,11 @@ resource "aws_eks_cluster" "this" {
   }
 }
 
+output "eks_oidc_url" {
+  value = aws_eks_cluster.this.identity.0.oidc.0.issuer
+  
+}
+
 resource "aws_eks_node_group" "this" {
   count             = 2
   cluster_name      = aws_eks_cluster.this.name
@@ -27,3 +32,10 @@ resource "aws_eks_node_group" "this" {
     managedby = "vader"
   }
 }
+
+output "eks_cluster_name" {
+  value = aws_eks_cluster.this.name
+}
+
+
+#TODO: Launch Template

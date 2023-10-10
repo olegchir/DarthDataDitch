@@ -8,6 +8,6 @@ if [ -f .env ]; then
     docker push ${ECR_URL}:dev
 else
     docker build --no-cache --build-arg GIT_COMMIT=$(git rev-parse --short HEAD) -f docker/Dockerfile -t darthdataditch:prod .
-    docker tag darthdataditch:prod ${ECR_URL}:prod
+    docker tag darthdataditch:prod ${ECR_URL}:0.0.4
     docker push ${ECR_URL}:prod
 fi
