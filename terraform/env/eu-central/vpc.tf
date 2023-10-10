@@ -4,6 +4,9 @@ module "eu_central_vpc" {
   subnet_cidr_blocks = ["10.200.1.0/24", "10.200.2.0/24"]
   vpc_name           = "${var.region}-vpc"
   subnet_name_prefix = "${var.region}-subnet"
+  tag_cluster_name = {
+    "kubernetes.io/cluster/eks-cluster-eu-central-1" = "owned"
+  }
 }
 
 output "eu_central_vpc_id" {

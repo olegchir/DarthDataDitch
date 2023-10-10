@@ -19,3 +19,8 @@ variable "subnet_name_prefix" {
   type        = string
   default     = "subnet"
 }
+
+variable "tag_cluster_name" {
+  type = map(string)
+  default = {}
+}
