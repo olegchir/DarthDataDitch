@@ -66,7 +66,7 @@ helm upgrade --install aws-load-balancer-controller eks/aws-load-balancer-contro
     --set serviceAccount.create=true \
     --set serviceAccount.name=aws-ddload-balancer-controller \
     --set region=us-east-1 \
-    --set vpcId=vpc-0b7b590f4a44a5540 \
+    --set vpcId=vpc-08d75a4f24bf1a3e2 \
     --set serviceAccount.annotations."eks\.amazonaws\.com/role-arn"=arn:aws:iam::433663489437:role/alb-ingress-controller
 
 
