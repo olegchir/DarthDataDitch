@@ -11,18 +11,19 @@ Inrastructure provisioned in AWS by terraform and at the end you will have confi
 1. All outputs for app deployment configuration
 ## Code Organisation.
 This terraform code organized with environments and modules and this code utilise terraform remote states. All related AWS provisioning code located in **terroform** directory of this git repo and structured as below.
-
-## ├── env
-## │   ├── eu-central
-## │   └── us-east
-## │       ├── policies
-## │       └── scripts
-## ├── global
-## └── modules
-----├---acm
-----├---eip
-----├---eks
-----└---vpc
+```
+|* env
+|   |* eu-central
+|   `* us-east
+|       |* policies
+|       `* scripts
+|* global
+`* modules
+    |* acm
+    |* eip
+    |* eks
+    `* vpc
+```
 In the ```global``` environment you will bi find everythong necessary for initial AWS configuration. In the ```env/region-name``` all necessary for provisioning regions.
 ## Infrastructure Dependencies
 ## Order of execution
