@@ -13,19 +13,21 @@ image:
 
 # Service configurations
 service:
-  type: ClusterIP
+  type: LoadBalancer
   port: 8000
 
 # Ingress configurations
 ingress:
-  enabled: true
+  enabled: false
   annotations: {}
   host: us.darthdataditch.jftr.info
   path: /
   subnets:
     - subnet-080c103c8fe171b8c
     - subnet-065073ac3d96f6fb5
-  eipId: eipalloc-06636ee36ce973e25
+  eipId: 
+    - eipalloc-0b9b74de3d4a657bc
+    - eipalloc-0c7d1051e79c9b3bd
 
 # ACM Certificate ARN for HTTPS
 acmCertificateArn: arn:aws:acm:us-east-1:433663489437:certificate/fa722073-69d2-430a-8620-2b8172ea3dff
