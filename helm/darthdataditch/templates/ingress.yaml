@@ -5,21 +5,20 @@ metadata:
   annotations:
     alb.ingress.kubernetes.io/healthcheck-path: "/healthcheck"
     alb.ingress.kubernetes.io/success-codes: "200"
-    alb.ingress.kubernetes.io/scheme: internet-facing
-    alb.ingress.kubernetes.io/listen-ports: '[{"HTTPS":443}]'
+    alb.ingress.kubernetes.io/scheme: "internet-facing"
+    alb.ingress.kubernetes.io/listen-ports: {{ "[{\"HTTPS\":443}]" | quote }}
     alb.ingress.kubernetes.io/certificate-arn: "{{ .Values.acmCertificateArn }}"
     alb.ingress.kubernetes.io/subnets: "{{ .Values.ingress.subnets | join "," }}"
-    alb.ingress.kubernetes.io/eip-id: "{{ .Values.ingress.eipId }}"
 spec:
   ingressClassName: alb
   rules:
-    - host: {{ .Values.ingress.host }}
-      http:
-        paths:
-          - path: {{ .Values.ingress.path  }}
-            pathType: Prefix
-            backend:
-              service:
-                name: {{ .Release.Name }}-darthdataditch
-                port:
-                  number: 8000
+  - host: {{ .Values.ingress.host }}
+    http:
+      paths:
+      - path: {{ .Values.ingress.path }}
+        pathType: Prefix
+        backend:
+          service:
+            name: {{ .Release.Name }}
+            port:
+              number: 8000
