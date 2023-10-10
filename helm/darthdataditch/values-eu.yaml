@@ -13,12 +13,13 @@ image:
 
 # Service configurations
 service:
-  type: ClusterIP
-  port: 8000
+  type: LoadBalancer
+  #type: ClusterIP
+  port: 443
 
 # Ingress configurations
 ingress:
-  enabled: true
+  enabled: false
   annotations: {}
   host: eu.darthdataditch.jftr.info
   path: /
