@@ -3,14 +3,22 @@ kind: Ingress
 metadata:
   name: {{ .Release.Name }}-ingress
   annotations:
-    alb.ingress.kubernetes.io/healthcheck-path: "/healthcheck"
-    alb.ingress.kubernetes.io/success-codes: "200"
-    alb.ingress.kubernetes.io/scheme: "internet-facing"
-    alb.ingress.kubernetes.io/listen-ports: {{ "[{\"HTTPS\":443}]" | quote }}
-    alb.ingress.kubernetes.io/certificate-arn: "{{ .Values.acmCertificateArn }}"
-    alb.ingress.kubernetes.io/subnets: "{{ .Values.ingress.subnets | join "," }}"
+    # alb.ingress.kubernetes.io/healthcheck-path: "/healthcheck"
+    # alb.ingress.kubernetes.io/success-codes: "200"
+    # alb.ingress.kubernetes.io/scheme: "internet-facing"
+    # alb.ingress.kubernetes.io/listen-ports: {{ "[{\"HTTPS\":443}]" | quote }}
+    # alb.ingress.kubernetes.io/certificate-arn: "{{ .Values.acmCertificateArn }}"
+    # alb.ingress.kubernetes.io/subnets: "{{ .Values.ingress.subnets | join "," }}"
+
+    service.beta.kubernetes.io/aws-load-balancer-type: "nlb"
+    service.beta.kubernetes.io/aws-load-balancer-eip-allocations: .Values.ingress.eipId | join ","
+    service.beta.kubernetes.io/aws-load-balancer-healthcheck-healthy-threshold: "2"
+    service.beta.kubernetes.io/aws-load-balancer-healthcheck-unhealthy-threshold: "2"
+    service.beta.kubernetes.io/aws-load-balancer-healthcheck-interval: "60"
+    service.beta.kubernetes.io/aws-load-balancer-healthcheck-timeout: "2"
+    service.beta.kubernetes.io/aws-load-balancer-healthcheck-path: "/healthcheck"
 spec:
-  ingressClassName: alb
+  ingressClassName: nlb
   rules:
   - host: {{ .Values.ingress.host }}
     http:
