@@ -34,7 +34,7 @@ resource "aws_route53_health_check" "us_east" {
   fqdn              = data.terraform_remote_state.us-east.outputs.dns_us-east-cluster-host
   port              = 443
   type              = "HTTPS"
-  resource_path     = "/heathcheck"
+  resource_path     = "/healthcheck"
   failure_threshold = 3
   request_interval  = 30
 }
@@ -43,7 +43,7 @@ resource "aws_route53_health_check" "eu_central" {
   fqdn              = data.terraform_remote_state.eu-central.outputs.dns_eu-central-cluster-host
   port              = 443
   type              = "HTTPS"
-  resource_path     = "/heathcheck"
+  resource_path     = "/healthcheck"
   failure_threshold = 3
   request_interval  = 30
 }

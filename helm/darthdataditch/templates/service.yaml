@@ -2,12 +2,12 @@ apiVersion: v1
 kind: Service
 metadata:
   name: {{ include "darthdataditch.fullname" . }}
-  annotationa:
-    service.beta.kubernetes.io/aws-load-balancer-type: "external"
+  annotations:
+    service.beta.kubernetes.io/aws-load-balancer-type: "nlb"
     service.beta.kubernetes.io/aws-load-balancer-scheme: "internet-facing"
     service.beta.kubernetes.io/aws-load-balancer-cross-zone-load-balancing-enabled: "true"
-    service.beta.kubernetes.io/aws-load-balancer-ssl-cert: .Values.acmCertificateArn
-    service.beta.kubernetes.io/aws-load-balancer-eip-allocations: .Values.ingress.eipId | join ","
+    service.beta.kubernetes.io/aws-load-balancer-ssl-cert: {{ .Values.acmCertificateArn }}
+    service.beta.kubernetes.io/aws-load-balancer-eip-allocations: {{ .Values.ingress.eipId | join "," }}
     service.beta.kubernetes.io/aws-load-balancer-healthcheck-healthy-threshold: "2"
     service.beta.kubernetes.io/aws-load-balancer-healthcheck-unhealthy-threshold: "2"
     service.beta.kubernetes.io/aws-load-balancer-healthcheck-interval: "60"
@@ -16,11 +16,12 @@ metadata:
   labels:
     {{- include "darthdataditch.labels" . | nindent 4 }}
 spec:
-  type: NodePort
+  type: LoadBalancer
   ports:
-    - port: 8000
-      targetPort: http
+    - port: 443
+      targetPort: 8000
       protocol: TCP
-      name: http
+      name: https
   selector:
     {{- include "darthdataditch.selectorLabels" . | nindent 4 }}
+    

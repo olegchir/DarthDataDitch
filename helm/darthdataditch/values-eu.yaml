@@ -1,4 +1,3 @@
-# values.yaml for darthdataditch Helm chart
 #Service account
 serviceAccount:
   create: true
@@ -27,8 +26,8 @@ ingress:
     - subnet-0821d59cb5acef490
     - subnet-02bbe06f9a2a45466
   eipId: 
-    - eipalloc-0f4c057d39b58ff93
     - eipalloc-0b75e29e04bff4e91
+    - eipalloc-0f4c057d39b58ff93
 
 # ACM Certificate ARN for HTTPS
 acmCertificateArn: arn:aws:acm:eu-central-1:433663489437:certificate/8aef760a-6292-4dd1-8e5b-d4adf93b2d00

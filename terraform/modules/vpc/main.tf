@@ -9,6 +9,8 @@ resource "aws_vpc" "main" {
   tags = {
     Name = var.vpc_name,
     managedby = "vader"
+    "kubernetes.io/role/elb" = "1"
+    "kubernetes.io/cluster/eks-cluster-eu-central-1" = "owned" ##TODO should be auto generation
   }
 }
 
@@ -24,7 +26,10 @@ resource "aws_subnet" "this" {
   map_public_ip_on_launch = true
   tags = {
     Name = "${var.subnet_name_prefix}-${element(data.aws_availability_zones.available.names, count.index)}",
-    managedby = "vader"
+    managedby = "vader",
+    "kubernetes.io/role/elb" = "1"
+    "kubernetes.io/cluster/eks-cluster-eu-central-1" = "owned"  
+
   }
 
 }
