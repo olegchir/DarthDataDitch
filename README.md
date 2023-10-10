@@ -18,11 +18,11 @@ This terraform code organized with environments and modules and this code utilis
 |       |* policies
 |       `* scripts
 |* global
-`* modules
+|* modules
     |* acm
     |* eip
     |* eks
-    `* vpc
+    |* vpc
 ```
 In the ```global``` environment you will bi find everythong necessary for initial AWS configuration. In the ```env/region-name``` all necessary for provisioning regions.
 ## Infrastructure Dependencies
