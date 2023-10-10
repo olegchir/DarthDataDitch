@@ -5,3 +5,8 @@ resource "aws_route53_record" "eu-central-cluster" {
   ttl     = "300"
   records = [module.alb_eip_a.eip_address, module.alb_eip_b.eip_address]
 }
+
+output "dns_eu-central-cluster-host" {
+  value = aws_route53_record.eu-central-cluster.name
+  
+}
