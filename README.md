@@ -74,7 +74,7 @@ helm upgrade --install aws-load-balancer-controller eks/aws-load-balancer-contro
 ## App deployment
 ### app deployment EU
 
-
+kubectl config current-context
 #### Get k8s context
 aws eks --region eu-central-1 update-kubeconfig --name eks-cluster-eu-central-1
 #### Install aws-ingress-controller
@@ -89,7 +89,7 @@ helm upgrade --install aws-load-balancer-controller eks/aws-load-balancer-contro
 --set serviceAccount.annotations."eks\.amazonaws\.com/role-arn"=arn:aws:iam::433663489437:role/alb-ingress-controller-eu-central-1
 
 helm package .
-helm upgrade --install helmdataditch ./darthdataditch-0.1.0.tgz  -f vaulues-eu.yaml
+helm upgrade --install helmdataditch ./darthdataditch-0.1.0.tgz  -f values-eu.yaml
 --set image.tag=$MY_ENV_VARIABLE
 helm install my-release my-chart --set image.tag=$MY_ENV_VARIABLE
 

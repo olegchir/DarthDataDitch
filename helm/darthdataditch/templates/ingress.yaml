@@ -7,9 +7,9 @@ metadata:
     alb.ingress.kubernetes.io/success-codes: "200"
     alb.ingress.kubernetes.io/scheme: internet-facing
     alb.ingress.kubernetes.io/listen-ports: '[{"HTTPS":443}]'
-    alb.ingress.kubernetes.io/certificate-arn: {{ .Values.acmCertificateArn }}
-    alb.ingress.kubernetes.io/subnets: {{ .Values.ingress.subnets | join "," }}
-    alb.ingress.kubernetes.io/eip-id: {{ .Values.ingress.eipId }}
+    alb.ingress.kubernetes.io/certificate-arn: "{{ .Values.acmCertificateArn }}"
+    alb.ingress.kubernetes.io/subnets: "{{ .Values.ingress.subnets | join "," }}"
+    alb.ingress.kubernetes.io/eip-id: "{{ .Values.ingress.eipId }}"
 spec:
   ingressClassName: alb
   rules:
