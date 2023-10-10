@@ -30,15 +30,17 @@ Files which are startes with `_` are not making changes to infra directly. Now l
 1. `module/eip` - used for external ip allocation
 1. `module/eks` - used for EKS cluster provisioning
 1. `module/vpc` - used for regional vpc provisioning
+All provisioned resources will be marked with tag `managedby = "vader"` 
 ## Infrastructure Dependencies
 1. AWS and Access to it.
 1. Domain or zone with avialability to delegate it
 1. Terraform version 1.6.0
-## Order of execution
+## Order of applying
 1. git clone this repository and make changes to terraform necessary for exact your setup, e.g. s3 buckets/domain names/etc
 1. Provisioning global environment - `terraform init` and `terraform apply` in **global** environment
 1. Provisioning regional environment - `terraform init` and `terraform apply` in **env/region** environment
 1. Applying DNS changes for Geo Based DNS Load balancing - `terraform init` and `terraform apply` in **dnslb**
+## Order of destroying
 
 
 
