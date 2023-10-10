@@ -10,7 +10,7 @@ metadata:
      alb.ingress.kubernetes.io/certificate-arn: "{{ .Values.acmCertificateArn }}"
      alb.ingress.kubernetes.io/subnets: "{{ .Values.ingress.subnets | join "," }}"
 spec:
-  ingressClassName: nlb
+  ingressClassName: alb
   rules:
   - host: {{ .Values.ingress.host }}
     http:
