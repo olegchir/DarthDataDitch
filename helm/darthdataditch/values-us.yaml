@@ -15,6 +15,9 @@ image:
 service:
   type: LoadBalancer
   port: 443
+  eipId: 
+    - eipalloc-0b9b74de3d4a657bc
+    - eipalloc-0c7d1051e79c9b3bd
 
 # Ingress configurations
 ingress:
