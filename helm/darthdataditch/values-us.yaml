@@ -29,7 +29,7 @@ ingress:
     - eipalloc-0b9b74de3d4a657bc
     - eipalloc-0c7d1051e79c9b3bd
 # ACM Certificate ARN for HTTPS
-acmCertificateArn: arn:aws:acm:us-east-1:433663489437:certificate/fa722073-69d2-430a-8620-2b8172ea3dff
+acmCertificateArn: arn:aws:acm:us-east-1:433663489437:certificate/078122b1-6844-4610-b604-0b6aa1b328c7
 
 # Pod configurations
 pod:
