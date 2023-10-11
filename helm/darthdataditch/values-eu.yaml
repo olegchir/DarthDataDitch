@@ -13,7 +13,9 @@ image:
 # Service configurations
 service:
   type: LoadBalancer
-  #type: ClusterIP
+  eipId: 
+    - eipalloc-0b75e29e04bff4e91
+    - eipalloc-0f4c057d39b58ff93
   port: 443
 
 # Ingress configurations
@@ -25,9 +27,6 @@ ingress:
   subnets:
     - subnet-0821d59cb5acef490
     - subnet-02bbe06f9a2a45466
-  eipId: 
-    - eipalloc-0b75e29e04bff4e91
-    - eipalloc-0f4c057d39b58ff93
 
 # ACM Certificate ARN for HTTPS
 acmCertificateArn: arn:aws:acm:eu-central-1:433663489437:certificate/747d3be1-2968-4d44-9ec9-71c845cda285
