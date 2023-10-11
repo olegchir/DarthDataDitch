@@ -4,11 +4,9 @@ resource "aws_route53_record" "geolocation_us_east" {
   type    = "CNAME"
   ttl     = "300"
   records = ["${data.terraform_remote_state.us-east.outputs.dns_us-east-cluster-host}"]
-
   set_identifier = "US-EAST-ENDPOINT"
-
-  geolocation_routing_policy {
-    continent = "NA"
+ latency_routing_policy {
+    region = "us-east-1"
   }
 
   health_check_id = aws_route53_health_check.us_east.id
@@ -20,11 +18,9 @@ resource "aws_route53_record" "geolocation_eu_central" {
   type    = "CNAME"
   ttl     = "300"
   records = ["${data.terraform_remote_state.eu-central.outputs.dns_eu-central-cluster-host}"]
-
   set_identifier = "EU-CENTRAL-ENDPOINT"
-
-  geolocation_routing_policy {
-    continent = "EU"
+  latency_routing_policy {
+    region = "eu-central-1"
   }
 
   health_check_id = aws_route53_health_check.eu_central.id
