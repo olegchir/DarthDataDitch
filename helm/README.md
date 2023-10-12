@@ -14,23 +14,13 @@
 - `env.S3_BUCKET_NAME:` - bucket name for application
 ## setup nlb to EKS
 1. Install aws load ballancer to EKS in each region
-- `helm repo add eks https://aws.github.io/eks-charts`
+- ```helm repo add eks https://aws.github.io/eks-charts
+```
 - ```helm upgrade --install aws-load-balancer-controller eks/aws-load-balancer-controller \
     --set clusterName=eks-cluster-$(AWS_REGION) \
     --set serviceAccount.create=true \
     --set serviceAccount.name=aws-ddload-balancer-controller \
     --set region=${AWS_REGION} \
     --set vpcId=${VPC_ID} \
-    --set serviceAccount.annotations."eks\.amazonaws\.com/role-arn"=${ALB_ROLE}```
-
-
-#### US ingress
-helm repo add eks https://aws.github.io/eks-charts``
-
-helm upgrade --install aws-load-balancer-controller eks/aws-load-balancer-controller \
-    --set clusterName=eks-cluster-us-east-1 \
-    --set serviceAccount.create=true \
-    --set serviceAccount.name=aws-ddload-balancer-controller \
-    --set region=us-east-1 \
-    --set vpcId=vpc-08d75a4f24bf1a3e2 \
-    --set serviceAccount.annotations."eks\.amazonaws\.com/role-arn"=arn:aws:iam::433663489437:role/alb-ingress-controller
+    --set serviceAccount.annotations."eks\.amazonaws\.com/role-arn"=${ALB_ROLE}
+    ```
