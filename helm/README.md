@@ -3,9 +3,9 @@
 - [Helm](https://helm.sh/docs/intro/install/)
 - [kubectl](https://kubernetes.io/docs/tasks/tools/install-kubectl-linux/)
 - [AWS CLI](https://docs.aws.amazon.com/cli/latest/userguide/getting-started-install.html)
-1. Before launching from the Death Star, ensure your AWS cli is configured on the command console.
-1. Get EKS context - ``aws eks --region <region-code> update-kubeconfig --name <cluster-name> for each regions``
-1. Get needed configuration parameters from infrastructure and build steps and fill values-`$[region]`.yaml in `helm/darthdataditch`:
+2. Before launching from the Death Star, ensure your AWS cli is configured on the command console.
+2. Get EKS context - ``aws eks --region <region-code> update-kubeconfig --name <cluster-name> for each regions``
+2. Get needed configuration parameters from infrastructure and build steps and fill values-`$[region]`.yaml in `helm/darthdataditch`:
 - `EKS cluster name` - Don't pull a Jar Jar! Know your deployment zone.
 - `ARN of alb-ingress-controller role` it is used for provisioning AWS Network Load Balancer
 - `VPC ID` - VPC Ids 1 for each region
