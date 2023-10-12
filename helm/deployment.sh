@@ -71,6 +71,7 @@ if [ "$1" = "eu" ]; then
   echo "Deploying to eu-central-1..."
   is_aws_lb_controller_running
   configure_k8s_access
+  deploy_darthdata_ditch
 
 
 
@@ -79,14 +80,12 @@ elif [ "$1" = "us" ]; then
     VPC_ID=${VPC_ID_US}
     ALBC_ROLE=${ALBC_ROLE_US}
     DEPLOYMENT_REGION="us"
-    echo "Deploying to us-east-1..."
-    if is_aws_lb_controller_running; then
-        echo "aws-load-balancer-controller is running."
-    else
-        echo "aws-load-balancer-controller is not running."
-    fi
+    echo "Deploying to eu-central-1..."
+    is_aws_lb_controller_running
+    configure_k8s_access
+    deploy_darthdata_ditch
 
 else
-    echo -e "Unknown flag provided. Exiting...\nPlease use 'eu', 'us', 'albc-eu', or 'albc-us'."
+    echo -e "Unknown flag provided. Exiting...\nPlease use 'eu', 'us'."
     exit 1
 fi
