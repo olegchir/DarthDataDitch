@@ -7,12 +7,15 @@ serviceAccount:
 replicaCount: 2
 image:
   repository: 433663489437.dkr.ecr.eu-central-1.amazonaws.com/darthdataditch-ecr
-  tag: 0.0.4
+  tag: {{ .Chart.AppVersion }}}
   pullPolicy: Always
 
 # Service configurations
 service:
   type: LoadBalancer
+  subnets:
+    - subnet-0821d59cb5acef490
+    - subnet-02bbe06f9a2a45466
   eipId: 
     - eipalloc-0b75e29e04bff4e91
     - eipalloc-0f4c057d39b58ff93
@@ -24,9 +27,6 @@ ingress:
   annotations: {}
   host: eu.darthdataditch.jftr.info
   path: /
-  subnets:
-    - subnet-0821d59cb5acef490
-    - subnet-02bbe06f9a2a45466
 
 # ACM Certificate ARN for HTTPS
 acmCertificateArn: arn:aws:acm:eu-central-1:433663489437:certificate/747d3be1-2968-4d44-9ec9-71c845cda285
@@ -71,6 +71,7 @@ autoscaling:
 
 env:
   S3_BUCKET_NAME: holocron-archives
+  APP_VERSION: {{ .Chart.AppVersion }}
 
 # debug
 containerCommand: ["/bin/bash"]

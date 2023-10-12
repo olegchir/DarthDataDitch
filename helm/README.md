@@ -5,10 +5,10 @@
 - [AWS CLI](https://docs.aws.amazon.com/cli/latest/userguide/getting-started-install.html)
 2. Before launching from the Death Star, ensure your AWS cli is configured on the command console.
 2. Get EKS context - ``aws eks --region <region-code> update-kubeconfig --name <cluster-name> for each regions``
-2. Get needed configuration parameters from infrastructure and build steps and fill values-`$[region]`.yaml in `helm/darthdataditch`:
+2. Get needed configuration parameters from infrastructure and build steps and fill "values-`$[eu,us]`.yaml" in `helm/darthdataditch`:
 - `EKS cluster name` - Don't pull a Jar Jar! Know your deployment zone.
-- `ARN of alb-ingress-controller role` it is used for provisioning AWS Network Load Balancer
-- `VPC ID` - VPC Ids 1 for each region
+- `ALBC_ROLE` it is used for provisioning AWS Network Load Balancer
+- `VPC_ID` - VPC Ids 1 for each region
 - `image.repository:` - Your ECR repo
 - `image.tag:`- version of the application code to be deployed
 - `service.eipId:` - 2 eip id for each region
@@ -30,5 +30,5 @@ helm upgrade --install aws-load-balancer-controller eks/aws-load-balancer-contro
     --set serviceAccount.name=aws-ddload-balancer-controller \
     --set region=${AWS_REGION} \
     --set vpcId=${VPC_ID} \
-    --set serviceAccount.annotations."eks\.amazonaws\.com/role-arn"=${ALB_ROLE}
+    --set serviceAccount.annotations."eks\.amazonaws\.com/role-arn"=${ALBC_ROLE}
 ```
