@@ -14,9 +14,10 @@
 - `env.S3_BUCKET_NAME:` - bucket name for application
 ## setup nlb to EKS
 1. Install aws load ballancer to EKS in each region
-- ```helm repo add eks https://aws.github.io/eks-charts
+```helm repo add eks https://aws.github.io/eks-charts
 ```
-- ```helm upgrade --install aws-load-balancer-controller eks/aws-load-balancer-controller \
+
+```helm upgrade --install aws-load-balancer-controller eks/aws-load-balancer-controller \
     --set clusterName=eks-cluster-$(AWS_REGION) \
     --set serviceAccount.create=true \
     --set serviceAccount.name=aws-ddload-balancer-controller \
