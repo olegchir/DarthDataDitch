@@ -55,7 +55,7 @@ is_aws_lb_controller_running() {
 
 ### Deploy DartHDataditch
 deploy_darthdata_ditch() {
-  CHART_VERSION=$(grep 'appVersion:' darthdataditch/Chart.yaml | awk '{print $2}')
+  CHART_VERSION=$(grep 'Version:' darthdataditch/Chart.yaml | awk '{print $2}')
   rm darthdataditch-*.tgz
   helm package darthdataditch/
   helm upgrade --install helmdataditch ./darthdataditch-${CHART_VERSION}.tgz  -f darthdataditch/values.yaml -f values-${DEPLOYMENT_REGION}.yaml
