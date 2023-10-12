@@ -58,7 +58,6 @@ autoscaling:
 
 env:
   S3_BUCKET_NAME: holocron-archives
-  APP_VERSION: {{ .Chart.AppVersion }}
 
 # debug
 containerCommand: ["/bin/bash"]
