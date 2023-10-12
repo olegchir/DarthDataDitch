@@ -1,0 +1,12 @@
+# values.yaml for darthdataditch Helm chart
+#Service account
+serviceAccount:
+  create: true
+  name: darthdataditch
+
+# Application configurations
+replicaCount: 2
+image:
+  repository: 433663489437.dkr.ecr.eu-central-1.amazonaws.com/darthdataditch-ecr
+  tag: 0.0.4
+  pullPolicy: Always
