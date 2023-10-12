@@ -1,4 +1,8 @@
 # Deployment Requirements
+1. Master Yoda once advised, 'Install these tools, you must, before deploying from your instance'
+- [Helm](https://helm.sh/docs/intro/install/)
+- [kubectl](https://kubernetes.io/docs/tasks/tools/install-kubectl-linux/)
+- [AWS CLI](https://docs.aws.amazon.com/cli/latest/userguide/getting-started-install.html)
 1. Before launching from the Death Star, ensure your AWS cli is configured on the command console.
 1. Get EKS context - ``aws eks --region <region-code> update-kubeconfig --name <cluster-name> for each regions``
 1. Get needed configuration parameters from infrastructure and build steps and fill values-`$[region]`.yaml in `helm/darthdataditch`:
