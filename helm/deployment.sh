@@ -55,10 +55,10 @@ is_aws_lb_controller_running() {
 
 ### Deploy DartHDataditch
 deploy_darthdata_ditch() {
-  CHART_VERSION=$($(grep 'appVersion:' darthdataditch/Chart.yaml | awk '{print $2}'))
+  CHART_VERSION=$(grep 'appVersion:' darthdataditch/Chart.yaml | awk '{print $2}')
   rm darthdataditch-*.tgz
   helm package darthdataditch/
-  helm upgrade --install helmdataditch ./darthdataditch-${CHART_VERSION}.tgz  -f darthdataditch/values.yaml -f values-${DEPLOYMENT_REGION}.yaml
+  helm upgrade --install helmdataditch darthdataditch/darthdataditch-${CHART_VERSION}.tgz  -f darthdataditch/values.yaml -f values-${DEPLOYMENT_REGION}.yaml
 }
 
 #### Deployment
@@ -68,7 +68,7 @@ if [ "$1" = "eu" ]; then
   VPC_ID=${VPC_ID_EU}
   ALBC_ROLE=${ALBC_ROLE_EU}
   DEPLOYMENT_REGION="eu"
-  echo "Deploying to eu-central-1..."
+  echo "Deploying to ${AWS_REGION}..."
   is_aws_lb_controller_running
   configure_k8s_access
   deploy_darthdata_ditch
@@ -80,7 +80,7 @@ elif [ "$1" = "us" ]; then
     VPC_ID=${VPC_ID_US}
     ALBC_ROLE=${ALBC_ROLE_US}
     DEPLOYMENT_REGION="us"
-    echo "Deploying to eu-central-1..."
+    echo "Deploying to ${AWS_REGION}..."
     is_aws_lb_controller_running
     configure_k8s_access
     deploy_darthdata_ditch
