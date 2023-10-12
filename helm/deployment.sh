@@ -58,7 +58,7 @@ deploy_darthdata_ditch() {
   CHART_VERSION=$(grep 'appVersion:' darthdataditch/Chart.yaml | awk '{print $2}')
   rm darthdataditch-*.tgz
   helm package darthdataditch/
-  helm upgrade --install helmdataditch darthdataditch/darthdataditch-${CHART_VERSION}.tgz  -f darthdataditch/values.yaml -f values-${DEPLOYMENT_REGION}.yaml
+  helm upgrade --install helmdataditch ./darthdataditch-${CHART_VERSION}.tgz  -f darthdataditch/values.yaml -f values-${DEPLOYMENT_REGION}.yaml
 }
 
 #### Deployment
