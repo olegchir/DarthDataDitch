@@ -6,5 +6,6 @@ WORKDIR /app
 COPY requirements.txt .
 RUN pip install -r requirements.txt
 COPY start.sh .
+COPY create-token.py .
 COPY app/ /app/app/
 CMD ["./start.sh"]
