@@ -16,19 +16,6 @@
 - `acmCertificateArn:` - 2 arns to SSL Certificates
 - `pod.annotations.eks.amazonaws.com/role-arn:` - AWS role attached to pods to access to bucket
 - `env.S3_BUCKET_NAME:` - bucket name for application
+- `env.USER_TOKENS` - coma separated list of creds for access to `/upload` e.g `USER_TOKENS="user1:bcryptSaltedHash,user2:bcryptSaltedHash"
 ## setup nlb to EKS
-1. Install aws load ballancer to EKS in each region
-```
-helm repo add eks https://aws.github.io/eks-charts
-
-```
-
-```
-helm upgrade --install aws-load-balancer-controller eks/aws-load-balancer-controller \
-    --set clusterName=eks-cluster-$(AWS_REGION) \
-    --set serviceAccount.create=true \
-    --set serviceAccount.name=aws-ddload-balancer-controller \
-    --set region=${AWS_REGION} \
-    --set vpcId=${VPC_ID} \
-    --set serviceAccount.annotations."eks\.amazonaws\.com/role-arn"=${ALBC_ROLE}
-```
+1. [deployment.sh](deployment.sh) will do this job for your if it is configured correctly
