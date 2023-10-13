@@ -5,7 +5,8 @@ metadata:
   labels:
     {{- include "darthdataditch.labels" . | nindent 4 }}
 spec:
-  replicas: 2
+  replicas: {{ .Values.replicaCount }}
+  terminationGracePeriodSeconds: {{ .Values.terminationGracePeriod }}
   strategy:
     type: RollingUpdate
     rollingUpdate:
