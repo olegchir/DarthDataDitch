@@ -13,4 +13,4 @@ image:
 env:
   S3_BUCKET_NAME: holocron-archives
   APP_VERSION:
-  USER_TOKENS: "jedi:$2b$12$/H4m9GGeXlVwRvTvHgu7R.pm2fD7PjMhzRIA8dr3H/sujBPAGZbfC"
+  USER_TOKENS: "jedi:$2b$12$SnqqC0wiU/ovEoYcmIjEFOadmb06f5Vh7vmvqxQSStvmGxtn9QnCa"
