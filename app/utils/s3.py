@@ -2,8 +2,9 @@ import os
 import logging
 import boto3
 from botocore.exceptions import BotoCoreError, ClientError, PartialCredentialsError
-from fastapi import UploadFile
 from .config import S3_BUCKET_NAME, AWS_PROFILE_NAME
+
+InProgress = {"count": 0}
 
 logging.basicConfig(level=logging.ERROR)
 logger = logging.getLogger(__name__)
@@ -17,6 +18,8 @@ else:
 
 _s3_client = None
 
+InProgress = {"count": 0}
+
 def get_s3_client():
     global _s3_client
     if _s3_client is None:
@@ -25,6 +28,7 @@ def get_s3_client():
     return _s3_client
 
 async def upload_file_to_s3(file_contents: bytes, filename: str):
+#    global InProgress
     try:
         # No need to read from file here, as we're already passing file_contents
         get_s3_client().put_object(
@@ -35,6 +39,8 @@ async def upload_file_to_s3(file_contents: bytes, filename: str):
         return {"status": "The Force is strong with this one!", "message": f"{filename} Hyperdrived to {S3_BUCKET_NAME}"}
     except Exception as e:
         return {"status": "It's a trap!", "message": str(e)}
+    finally:
+        InProgress["count"] -= 1
 
 def check_s3_access(bucket_name: str) -> bool:
     try:

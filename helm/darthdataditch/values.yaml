@@ -8,5 +8,9 @@ serviceAccount:
 replicaCount: 2
 image:
   repository: 433663489437.dkr.ecr.eu-central-1.amazonaws.com/darthdataditch-ecr
-  tag: 0.0.4
+  tag: 
   pullPolicy: Always
+env:
+  S3_BUCKET_NAME: holocron-archives
+  APP_VERSION:
+  USER_TOKENS: "jedi:$2b$12$/H4m9GGeXlVwRvTvHgu7R.pm2fD7PjMhzRIA8dr3H/sujBPAGZbfC"

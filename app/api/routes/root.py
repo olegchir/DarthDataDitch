@@ -11,11 +11,12 @@ def root():
 To upload a file using curl, run the following command:
 
     ```
-    curl -X POST "http://<your_host>:<your_port>/upload/" -F "file=@<path_to_your_file>"
+    curl -X POST -H "Authorization: Bearer <your auth token here>" "http://<your_host>:<your_port>/upload" -F "file=@<path_to_your_file>"
     ```
     Example:
     ```
-    curl -X POST "http://localhost:8000/upload/" -F "file=@./sample.txt"
+    curl -X POST "https://ddd.darthdataditch.jftr.info/upload" -F "file=@./sample.txt"
+    curl -X POST -H "Authorization: Bearer <your auth token here>" http://localhost:8000/upload -F "file=@./sample.txt"
     ```
 
              ___
