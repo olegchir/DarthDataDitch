@@ -1,11 +1,12 @@
-from fastapi import APIRouter
+from fastapi import APIRouter, Depends
 from fastapi.responses import PlainTextResponse
+from app.utils import auth
 from app.utils.config import APP_VERSION
 
 router = APIRouter()
 
 @router.get("/")
-def root():
+def root(user: str = Depends(auth.get_current_user)):
     help_text = f"""
     Welcome to the Star Wars API! ver. {APP_VERSION}
 To upload a file using curl, run the following command:
@@ -16,7 +17,6 @@ To upload a file using curl, run the following command:
     Example:
     ```
     curl -X POST "https://ddd.darthdataditch.jftr.info/upload" -F "file=@./sample.txt"
-    curl -X POST -H "Authorization: Bearer <your auth token here>" http://localhost:8000/upload -F "file=@./sample.txt"
     ```
 
              ___

@@ -1,11 +1,12 @@
-from fastapi import APIRouter
+from fastapi import APIRouter, Depends
 from fastapi.responses import PlainTextResponse
+from app.utils import auth
 from app.utils.config import APP_VERSION
 from textwrap import dedent
 router = APIRouter()
 
 @router.get("/version")
-def version():
+def version(user: str = Depends(auth.get_current_user)):
     version = dedent(f"""
 Welcome to the Star Wars API! ver. {APP_VERSION}
    
