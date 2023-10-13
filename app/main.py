@@ -21,5 +21,8 @@ async def startup_event():
 
 @app.on_event("shutdown")
 async def shutdown_event():
+    logger.info("Initiating hyperdrive shutdown... May the Force be with you during this transition!")
     while s3.InProgress["count"] > 0:
+        logger.info(f"Waiting for Hyperdrive deactivation {s3.InProgress['count']} tasks in queue...")
         await asyncio.sleep(1)
+    logger.info("Hyperdrive deactivation complete. The Force remains strong with this one! Till the next galactic journey")
