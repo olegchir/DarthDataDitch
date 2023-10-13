@@ -10,4 +10,10 @@ APP_MODULE="app.main:app"                              # the application module 
                                                        # AWS profile name
 # Start your FastAPI app with Gunicorn
 #exec gunicorn --workers $NUM_WORKERS --bind 0.0.0.0:8000 -k $UVICORN_WORKER_CLASS $APP_MODULE
-exec uvicorn ${APP_MODULE} --reload --host 0.0.0.0 --port 8000 
+exec uvicorn ${APP_MODULE} --reload --host 0.0.0.0 --port 8000
+term_handler() {
+    kill -TERM "$APP_PID" 2>/dev/null
+}
+trap term_handler SIGTERM
+wait "$APP_PID"
+
