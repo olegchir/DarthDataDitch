@@ -3,7 +3,7 @@ Infrastructure utilize AWS resources and fully builded in IaaC approach. For dep
 ![Prinipal solution design diagram](ddd.png)
 
 # DarthDataDitch Infrastructure
-Detailed explanatioon of infrastructure [here](terraform/README.md)
+Detailed explanation of infrastructure [here](terraform/README.md)
 
 # Building
 ## How to build
