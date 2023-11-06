@@ -51,4 +51,4 @@ I remain cautiously optimistic about JB. There's a part of me that believes in s
 
 For anyone out there about to embark on this journey with JB, may the odds be ever in your
 
-## PS All materials connected to this task are [here](https://github.com/zloykaban/DarthDataDitch)
+## PS All materials connected to this task are [here](https://github.com/zloykaban/DarthDataDitch) you are able to evaluate effort and task it self described in design [doc](https://docs.google.com/document/d/1_5W-mnQ0Ws0bq8gDrwcKPqiczHOUIyRVEaWobPW_bQk)
